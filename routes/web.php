@@ -8,13 +8,11 @@ Route::get('/', function () {
 });
 
 // Rute untuk halaman "Tentang Kami"
-Route::get('/tentang-kami', function () {
+Route::get('/tentangKami', function () {
     return view('tentangKami'); // Pastikan ada file tentangKami.blade.php di resources/views
 });
 
-Route::get('/hubungi-kami', function () {
-    return view('hubungi-kami');
-});
+
 
 // Rute untuk halaman "Artikel"
 Route::get('/artikel', function () {
