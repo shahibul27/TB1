@@ -16,7 +16,6 @@ Route::get('/hubungi-kami', function () {
     return view('hubungi-kami');
 });
 
-
 // Rute untuk halaman "Artikel"
 Route::get('/artikel', function () {
     return view('artikel'); // Ganti dengan nama file view yang sesuai
