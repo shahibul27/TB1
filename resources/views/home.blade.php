@@ -353,6 +353,7 @@
         <hr>
 
         {{-- body 7 --}}
+        <section id="hubungikami" class="py-10">
         <div class="text-center py-5 text-muted">
             <h1 class="h4 mb-4">Hubungi Kami</h1>
             <h2 class="h5">Kantor Pusat</h2>
