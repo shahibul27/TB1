@@ -3,140 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tugas Web Enterprice</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Inaklug</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 10;
-        }
-
         body {
-            margin-top: 80px;
+            font-family: 'Ubuntu';
+        }
+        .bg-gradient-custom {
+            background: linear-gradient(to right, #46074E, #197BD0);
+        }
+        .bg-gradient-custom-footer {
+            background: linear-gradient(to right, #46074E, rgba(70, 7, 78, 0.8), #197BD0);
         }
 
-        .bg-tentang-kami {
-            background-image: url('images/dresden2.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 550px;
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-overlay {
             position: relative;
         }
 
-        .bg-tentang-kami h1 {
+        .image-overlay::before {
+            content: "";
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 60%;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            background: linear-gradient(to right, #46074E, transparent);
+            opacity: 0.8;
+            border-radius: 10px 0 0 10px;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .overlay-content {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
             color: white;
-            font-size: 2rem;
+            z-index: 1;
+            text-align: left;
+        }
+
+        .line {
+            width: 2px;
+            height: 40px;
+            background-color: white;
+            margin-bottom: 5px;
+        }
+
+        .card-title {
+            font-size: 1em;
+            margin: 0;
+            text-align: left;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .logo-box {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            width: 200px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .article-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .article-title {
+            font-size: 16px;
+            padding: 15px;
+        }
+
+        .btn-custom {
+            margin-top: 20px;
+            border: 1px solid #197BD0;
+            color: #197BD0;
+            border-radius: 20px;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background-color: #197BD0;
+            color: #fff;
         }
     </style>
 </head>
-<body class="bg-gray-50">
 
-    <!-- Header -->
-    <header class="navbar py-0 bg-gradient-to-r from-[#46074E] to-[#197BD0] h-[80px] shadow-lg w-full">
-        <div class="container mx-auto flex items-center h-full px-5 sm:px-10 text-white font-bold justify-between">
-            <div class="flex items-center">
-                <img src="{{ asset('images/inaklug.jpeg') }}" alt="Inaklug Logo" class="h-[50px] mr-3">
-                <h1 class="text-2xl">Inaklug</h1>
+<body>
+    <!-- Navbar -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-gradient-custom shadow-lg fixed-top">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand text-white d-flex align-items-center" href="#">
+                <img src="{{ asset('images/inaklug.png') }}" alt="Inaklug Logo" class="d-inline-block align-text-top" height="50">
+                <span class="ms-2 me-5 fs-4">Inaklug</span>
+            </a>            
+
+            <!-- Untuk mobile -->
+            <button 
+                class="navbar-toggler" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Route -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/tentang-kami">Tentang Kami</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#layanan-kami">Layanan Kami</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/artikel">Artikel</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#hubungi-kami">Hubungi Kami</a></li>
+                </ul>
+                <!-- Button Daftar -->
+                <a href="#" class="btn rounded-5 ms-auto text-white " style="background: #2d5086">Daftar Online</a>
             </div>
-            <nav class="hidden md:flex gap-5 text-sm ml-10">
-                <a href="#home" class="hover:text-gray-200 transition-colors duration-300">Home</a>
-                <a href="#tentang-kami" class="hover:text-gray-200 transition-colors duration-300">Tentang Kami</a>
-                <a href="#layanan-kami" class="hover:text-gray-200 transition-colors duration-300">Layanan Kami</a>
-                <a href="#artikel" class="hover:text-gray-200 transition-colors duration-300">Artikel</a>
-                <a href="#hubungi-kami" class="hover:text-gray-200 transition-colors duration-300">Hubungi Kami</a>
-            </nav>
-            <button type="button" class="hidden md:block ml-auto px-6 py-2 bg-[#1E3A8A] text-white rounded-full hover:bg-blue-700">Daftar Online</button>
+        </div>
+    </header>
+
+    <main>
+        {{-- body 1 --}}
+        <div class="container-fluid mt-5 position-relative" style="height: 450px; padding: 0;">
+            <img src="{{ asset('images/picgedung.png') }}" alt="" class="position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover;">
             
-            <!-- Menu Hamburger untuk Mobile -->
-            <div class="md:hidden ml-auto">
-                <button id="menu-toggle" class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
+            <div class="position-absolute d-flex align-items-start bg-gradient-custom text-white p-3" style="left: 5%; top: 65%; width: 90%; max-width: 600px; border-radius: 8px;">
+                            
+                <div class="bg-white me-2" style="height: 30px; width: 1px;"></div>
+                            
+                <h1 class="fs-5 mb-0 flex-grow-1 ps-2 text-center text-md-start">
+                    INGIN KULIAH DAN BERKARIR DI LUAR NEGERI?
+                </h1>
+                <button class="d-flex align-items-center text-white btn btn-outline-light ms-1 px-3 py-1 mt-2 mt-md-0">
+                    SELENGKAPNYA
+                    <span class="ms-1">&#x25BC;</span>
                 </button>
             </div>
         </div>
 
-        <!-- Menu Dropdown untuk Mobile -->
-        <nav id="mobile-menu" class="hidden md:hidden w-full">
-            <div class="flex flex-col bg-gradient-to-r from-[#46074E] to-[#197BD0] text-white text-sm">
-                <a href="#home" class="py-2 px-5 hover:bg-blue-700 transition-colors duration-300">Home</a>
-                <a href="#tentang-kami" class="py-2 px-5 hover:bg-blue-700 transition-colors duration-300">Tentang Kami</a>
-                <a href="#layanan-kami" class="py-2 px-5 hover:bg-blue-700 transition-colors duration-300">Layanan Kami</a>
-                <a href="#artikel" class="py-2 px-5 hover:bg-blue-700 transition-colors duration-300">Artikel</a>
-                <a href="#hubungi-kami" class="py-2 px-5 hover:bg-blue-700 transition-colors duration-300">Hubungi Kami</a>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Bagian Tentang Kami -->
-    <div class="bg-tentang-kami">
-        <h1 class="text-3xl sm:text-5xl font-bold">Tentang Kami</h1>
-    </div>
-
-    <!-- Bagian Profil, Visi, dan Misi -->
-    <section id="profil-visi-misi" class="py-10 bg-gray-100">
-        <div class="container mx-auto px-4 sm:px-10">
-            <h3 class="text-3xl font-bold text-left mb-8">PROFIL</h3>
-            <p class="text-justify mb-10 w-full">
-                Sejak berdiri pada tahun 2018, kami terus berkembang menjadi konsultan pendidikan internasional yang diakui atas kredibilitas dan dedikasi kami dalam membantu generasi muda Indonesia. Dengan layanan terpercaya dan dukungan penuh, kami berkomitmen untuk memberikan bimbingan terbaik dan mempersiapkan anak muda untuk meraih cita-cita mereka serta mencapai kesuksesan di negara-negara yang mereka tuju.
+        {{-- body 2 --}}
+        <div class="container py-5 text-muted" style="max-width: 860px;">
+            <h1 class="mb-3 fs-4 text-center">Tentang Kami</h1>
+            <p class="fs-6 text-center">
+                Inaklug adalah Konsultan Pendidikan Internasional di Indonesia yang sudah memberangkatkan lebih dari 3000 mahasiswa indonesia yang ingin kuliah, perjalanan wisata dan berkarir dinegara maju didunia.
             </p>
-            <div class="flex flex-col sm:flex-row gap-8 justify-center">
-                <!-- Kolom Visi -->
-                <div class="w-full sm:w-1/2 flex flex-col items-center">
-                    <img src="images/visi.png" alt="Visi Image" class="w-full max-w-2xl mb-4">
-                    <h4 class="text-2xl font-semibold mb-2 text-center">Visi</h4>
-                    <p class="text-justify max-w-2xl">Membangun Sumber Daya Indonesia yang memiliki daya saing tinggi, tangguh, dan siap bersaing secara internasional.</p>
-                </div>
+        </div>
+        
+        <hr>
 
-                <!-- Kolom Misi -->
-                <div class="w-full sm:w-1/2 flex flex-col items-center">
-                    <img src="images/misi.png" alt="Misi Image" class="w-full max-w-2xl mb-4">
-                    <h4 class="text-2xl font-semibold mb-2 text-center">Misi</h4>
-                    <p class="text-justify max-w-2xl">Menyiapkan generasi Indonesia masa depan yang kompetitif, mandiri, dan profesional melalui pendidikan berkualitas.</p>
+        {{-- body 3 --}}
+        <div class="container py-5 text-muted" style="max-width: 860px;">
+            <h1 class="mt-3 mb-5 fs-4 text-center">Layanan Kami</h1>    
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="image-overlay">
+                            <img src="{{ asset('images/bachelor.png') }}" class="card-img" alt="Studi S1 - Bachelor">
+                            <div class="overlay-content">
+                                <div class="line mb-4"></div>
+                                <h5 class="card-title">Studi S1 - Bachelor</h5>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="image-overlay">
+                            <img src="{{ asset('images/master.png') }}" class="card-img" alt="Studi S2 - Master">
+                            <div class="overlay-content">
+                                <div class="line mb-4"></div>
+                                <h5 class="card-title">Studi S2 - Master</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="image-overlay">
+                            <img src="{{ asset('images/phd.jpg') }}" class="card-img" alt="Studi S3 - Ph.D">
+                            <div class="overlay-content">
+                                <div class="line mb-4"></div>
+                                <h5 class="card-title">Studi S3 - Ph.D</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="image-overlay">
+                            <img src="{{ asset('images/kursus.png') }}" class="card-img" alt="Kursus Bahasa Asing">
+                            <div class="overlay-content">
+                                <div class="line mb-4"></div>
+                                <h5 class="card-title">Kursus Bahasa Asing</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="image-overlay">
+                            <img src="{{ asset('images/studytour.png') }}" class="card-img" alt="Study Tour">
+                            <div class="overlay-content">
+                                <div class="line mb-4"></div>
+                                <h5 class="card-title">Study Tour</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="image-overlay">
+                            <img src="{{ asset('images/ausbildung.jpg') }}" class="card-img" alt="Ausbildung">
+                            <div class="overlay-content">
+                                <div class="line mb-4"></div>
+                                <h5 class="card-title">Ausbildung</h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="text-center mt-10">
-                <a href="#layanan-kami" class="px-6 py-2 border border-purple-500 text-purple-500 rounded-full hover:bg-purple-500 hover:text-white">Layanan Kami</a>
+        <!-- Body 4 -->
+        <div class="container py-5 text-muted" style="max-width: 860px;">
+            <h1 class="mt-3 mb-3 fs-4 text-center">Mitra Kami</h1> 
+            <div class="logo-container">
+                <div class="logo-box">
+                    <img src="{{ asset('images/aviation.jpg') }}" alt="424 Aviation">
+                </div>
+                <div class="logo-box">
+                    <img src="{{ asset('images/adrew.png') }}" alt="St. Andrew's College">
+                </div>
+                <div class="logo-box">
+                    <img src="{{ asset('images/htw.png') }}" alt="HTW Berlin">
+                </div>
+                <div class="logo-box">
+                    <img src="{{ asset('images/studygroup.png') }}" alt="Study Group">
+                </div>
+            </div>            
+        </div>
+
+        {{-- body 5 --}}
+        <div class="container py-5 text-muted" style="max-width: 700px;">
+            <div class="d-flex flex-column flex-md-row align-items-center bg-gradient-custom text-white p-3" style="width: 100%; border-radius: 8px;">
+                <!-- Teks dan tombol dalam satu baris atau kolom tergantung ukuran layar -->
+                <div class="flex-grow-1 text-center text-md-start">
+                    <h1 class="py-2 fs-5 mb-0 ps-md-2">INGIN KULIAH DAN BERKARIR DI LUAR NEGERI?</h1>
+                    <p class="pb-2 mb-0 ps-md-2">Konsultasi Seputar Kuliah/Bekerja di Luar Negeri</p>
+                </div>
+                
+                <!-- Tombol di sebelah kanan atau bawah teks tergantung ukuran layar -->
+                <button class="btn btn-outline-light text-white mt-2 mt-md-0 ms-md-3 px-3 py-1">
+                    SELENGKAPNYA
+                    <span class="ms-1">&#x25BC;</span>
+                </button>
+            </div>            
+        </div>                                  
+
+        {{-- body 6 --}}
+        <div class="container py-5 text-muted" style="max-width: 700px;">
+            <h1 class="mt-3 mb-5 fs-4 text-center">Artikel Terbaru</h1> 
+            <div class="container text-center">
+                <!-- Grid Artikel -->
+                <div class="article-grid">
+                    <!-- Artikel 1 -->
+                    <div class="article-card">
+                        <img src="{{ asset('images/studijerman.png') }}" alt="Artikel 1">
+                        <div class="article-title">5 Fakta yang Harus Kamu Ketahui Sebelum Studi ke Jerman</div>
+                    </div>
+                    
+                    <!-- Artikel 2 -->
+                    <div class="article-card">
+                        <img src="{{ asset('images/korona.png') }}" alt="Artikel 2">
+                        <div class="article-title">Uni Eropa Menghadapi Virus Korona</div>
+                    </div>
+                    
+                    <!-- Artikel 3 -->
+                    <div class="article-card">
+                        <img src="{{ asset('images/bahasajerman.png') }}" alt="Artikel 3">
+                        <div class="article-title">Belajar Bahasa Jerman Bersama Goethe Institut</div>
+                    </div>
+                    
+                    <!-- Artikel 4 -->
+                    <div class="article-card">
+                        <img src="{{ asset('images/gatescambride.png') }}" alt="Artikel 4">
+                        <div class="article-title">Apa Itu Gates Cambridge? Yuk Cari Tahu</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-custom mt-5">ARTIKEL LAINNYA</button>
             </div>
         </div>
-    </section>
 
-    <!-- Bagian Hubungi Kami -->
-    <section id="hubungi-kami" class="py-10">
-        <div class="container mx-auto text-center">
-            <h3 class="text-3xl font-bold mb-2">Hubungi Kami</h3>
-            <p>Kantor Pusat</p>
-            <p>Mula by Galeria Jakarta, Cilandak Town Square, Lt. Basement.</p>
-            <p>Phone: 082367634052</p>
-        </div>
+        <hr>
 
-        <div class="text-center mt-10">
-            <a href="#lokasi-kami" class="px-6 py-2 border border-purple-500 text-purple-500 rounded-full hover:bg-purple-500 hover:text-white">Lokasi Kami</a>
-            <a href="#kirim-pesan" class="px-6 py-2 border border-purple-500 text-purple-500 rounded-full hover:bg-purple-500 hover:text-white">Kirim Pesan</a>
+        {{-- body 7 --}}
+        <div class="text-center py-5 text-muted">
+            <h1 class="h4 mb-4">Hubungi Kami</h1>
+            <h2 class="h5">Kantor Pusat</h2>
+            <p class="">MULA BY GALERIA JAKARTA, CILANDAK TOWN SQUARE, LT. BASEMENT.</p>
+            <p class="">Phone: 085286754052</p>
+
+            <!-- Buttons -->
+            <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
+                <a href="#" class="btn bg-gradient-custom-footer text-white rounded-5 fs-6">LOKASI KAMI</a>
+                <a href="#" class="btn bg-body-secondary border-dark rounded-5 fs-6">KIRIM PESAN</a>
+            </div>
         </div>
-    </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-r from-[#46074E] to-[#197BD0] text-white py-4">
-        <div class="container mx-auto text-center">
-            <p>Copyright &copy; 2020 - Inaklug Indonesia | Hak cipta dilindungi undang-undang</p>
-        </div>
+    <footer class="bg-gradient-custom-footer text-center text-white py-3">
+        <p class="mb-0">Copyright @ 2020 - Inaklug Indonesia | Hak cipta dilindungi undang-undang</p>
     </footer>
 
-    <script>
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 </html>
